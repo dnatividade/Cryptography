@@ -3,27 +3,31 @@
 
 ### Node [A]
 ```
+Parameters:
 g= 957
 p= 113
 kA=11
 ```
 
 ```
+Equation:
 (g^kA) MOD p = qA
-qB
+get: qB
 (qB^qA) mod p = K
 ```
 ---
 
 ### Node [B]
 ```
+Parameters:
 g= 957
 p= 113
 kB=17
 ```
 
 ```
+Equation:
 (g^kB) MOD p = qB
-qA
+get: qA
 (qA^qB) mod p = K
 ```
