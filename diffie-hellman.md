@@ -31,3 +31,7 @@ Equation:
 get: qA
 (qA^qB) mod p = K
 ```
+
+---
+
+SOURCE: https://pt.khanacademy.org/computing/computer-science/cryptography/modern-crypt/v/diffie-hellman-key-exchange-part-2
