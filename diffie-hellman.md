@@ -1,4 +1,7 @@
-### [A]
+## Diffie-Hellman example:
+
+
+### Node [A]
 ```
 g= 957
 p= 113
@@ -12,7 +15,7 @@ qB
 ```
 ---
 
-### [B]
+### Node [B]
 ```
 g= 957
 p= 113
