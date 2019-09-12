@@ -1,6 +1,8 @@
 /*
  * Code obtained from: http://marko-editor.com/articles/cryptopp_sign_string/
- * @author: Michael Munzert
+ * @autor: Michael Munzert
+ * 
+ * slightly adapted by: dnatividade
  */
 
 
@@ -23,14 +25,17 @@
 
 #include <string>
 
-typedef unsigned char byte;
+#define KEYSIZE 3072
 
+using std::string;
+
+typedef unsigned char byte;
 
 // see http://www.cryptopp.com/wiki/RSA
 
 struct KeyPairHex {
-  std::string publicKey;
-  std::string privateKey;
+  string publicKey;
+  string privateKey;
 };
 
 using Signer   = CryptoPP::RSASS<CryptoPP::PSSR, CryptoPP::Whirlpool>::Signer;
@@ -58,8 +63,8 @@ inline KeyPairHex RsaGenerateHexKeyPair(unsigned int aKeySize) {
 }
 
 //==============================================================================
-inline std::string RsaSignString(const std::string &aPrivateKeyStrHex,
-                                 const std::string &aMessage) {
+inline string RsaSignString(const string &aPrivateKeyStrHex,
+                                 const string &aMessage) {
 
   // decode and load private key (using pipeline)
   CryptoPP::RSA::PrivateKey privateKey;
@@ -67,7 +72,7 @@ inline std::string RsaSignString(const std::string &aPrivateKeyStrHex,
                                          new CryptoPP::HexDecoder()).Ref());
 
   // sign message
-  std::string signature;
+  string signature;
   Signer signer(privateKey);
   CryptoPP::AutoSeededRandomPool rng;
 
@@ -80,9 +85,9 @@ inline std::string RsaSignString(const std::string &aPrivateKeyStrHex,
 }
 
 //==============================================================================
-inline bool RsaVerifyString(const std::string &aPublicKeyStrHex,
-                            const std::string &aMessage,
-                            const std::string &aSignatureStrHex) {
+inline bool RsaVerifyString(const string &aPublicKeyStrHex,
+                            const string &aMessage,
+                            const string &aSignatureStrHex) {
 
   // decode and load public key (using pipeline)
   CryptoPP::RSA::PublicKey publicKey;
@@ -90,7 +95,7 @@ inline bool RsaVerifyString(const std::string &aPublicKeyStrHex,
                                         new CryptoPP::HexDecoder()).Ref());
 
   // decode signature
-  std::string decodedSignature;
+  string decodedSignature;
   CryptoPP::StringSource ss(aSignatureStrHex, true,
                             new CryptoPP::HexDecoder(
                               new CryptoPP::StringSink(decodedSignature)));
